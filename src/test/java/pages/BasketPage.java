@@ -1,0 +1,62 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+
+public class BasketPage extends BasePage{
+
+    private final static By ITEM_NAME = By.className("inventory_item_name");
+    private final static By ITEM_DESCRIPTION = By.xpath("//div[@class='inventory_item_desc']");
+    private final static By ITEM_PRICE = By.xpath("//div[@class='inventory_item_price']");
+    private final static By CHECKOUT_BUTTON = By.id("checkout");
+    private final static By REMOVE_BUTTON = By.id("remove-sauce-labs-backpack");
+    private final static By CONTINUE_SHOPPING_BUTTON = By.xpath("//img[@alt='Go back']");
+    private final static By NUMBER_OF_ITEMS_IN_BASKET = By.xpath("//span[@class='shopping_cart_badge']");
+
+    public BasketPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public boolean isCheckoutButtonPresent()    {
+        try {
+            driver.findElement(CHECKOUT_BUTTON);
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    public String getItemName(String itemName)  {
+        return driver.findElement(ITEM_NAME).getText();
+    }
+
+    public String getItemDescription(String itemName)   {
+        return driver.findElement(ITEM_DESCRIPTION).getText();
+    }
+
+    public String getItemPrice(String itemName) {
+        return driver.findElement(ITEM_PRICE).getText();
+    }
+
+    public void clickCheckoutButton(String itemName)    {
+        driver.findElement(CHECKOUT_BUTTON).click();
+    }
+
+    public void clickRemoveButton(String itemName)  {
+        driver.findElement(REMOVE_BUTTON).click();
+    }
+
+    public void clickContinueShoppingButton(String itemName)    {
+        driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+    }
+
+    public boolean numberOfItemsInBasket()  {
+        try {
+            driver.findElement(NUMBER_OF_ITEMS_IN_BASKET).isDisplayed();
+        }   catch (NoSuchElementException ex)   {
+            return false;
+        }
+        return true;
+    }
+}

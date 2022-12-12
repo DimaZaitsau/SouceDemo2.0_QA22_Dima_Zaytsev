@@ -1,0 +1,23 @@
+package tests;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class ProductsTests extends BaseTests {
+
+    @Test
+    public void priductsTest()  {
+
+        String testItemName = "Sauce Labs Backpack";
+
+        loginPage.setUsername("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLoginButton();
+
+        productsPage.getItemDescription(testItemName);
+        productsPage.getItemPrice(testItemName);
+        productsPage.clickAddToCartButton(testItemName);
+        productsPage.openItem(testItemName);
+        Assert.assertTrue(itemPage.isBackToProductButtonPresent());
+    }
+}
