@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 public class CheckoutOverviewPage extends BasePage  {
 
     private final static By ITEM_NAME = By.xpath("//div[@class='inventory_item_name']");
-    private final static By ITEM_DESCRIPTION = By.xpath("//div[@class='inventory_item_desc']");
-    private final static By ITEM_PRICE = By.xpath("//div[@class='inventory_item_price']");
+    private final static By ITEM_DESCRIPTION = By.cssSelector(".inventory_item_desc");
+    private final static By ITEM_PRICE = By.cssSelector(".inventory_item_price");
     private final static By CANCEL_BUTTON = By.id("cancel");
     private final static By SHOPPING_BASKET_BUTTON = By.xpath("//a[@class='shopping_cart_link']");
     private final static By FINISH_BUTTON = By.id("finish");

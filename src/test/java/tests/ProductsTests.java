@@ -6,9 +6,9 @@ import org.testng.annotations.Test;
 public class ProductsTests extends BaseTests {
 
     @Test
-    public void priductsTest()  {
+    public void productsTest()  {
 
-        String testItemName = "Sauce Labs Backpack";
+        String testItemName = "Sauce Labs Bike Light";
 
         loginPage.setUsername("standard_user");
         loginPage.setPassword("secret_sauce");

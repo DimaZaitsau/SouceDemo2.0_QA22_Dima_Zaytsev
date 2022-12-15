@@ -8,7 +8,7 @@ public class ItemPage extends BasePage  {
     private final static By BACK_TO_PRODUCT_BUTTON = By.id("back-to-products");
     private final static By ITEM_NAME = By.xpath("//div[@class='inventory_details_name large_size']");
     private final static By ITEM_DESCRIPTION = By.xpath("//div[@class='inventory_details_desc large_size']");
-    private final static By ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-backpack");
+    private final static By ADD_TO_CART_BUTTON = By.xpath("//button[@class='btn btn_primary btn_small btn_inventory']");
     private final static By ITEM_PRICE = By.className("inventory_details_price");
     private final static By SHOPPING_BASKET = By.className("shopping_cart_link");
     private final static By SHOPPING_BASKET_FULL = By.xpath("//span[@class='shopping_cart_badge']");

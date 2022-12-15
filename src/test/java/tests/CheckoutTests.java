@@ -7,7 +7,7 @@ public class CheckoutTests extends BaseTests    {
 
     @Test
     public void checkoutTest()  {
-        String testItemName = "Sauce Labs Backpack";
+        String testItemName = "Sauce Labs Bike Light";
 
         loginPage.setUsername("standard_user");
         loginPage.setPassword("secret_sauce");
@@ -15,12 +15,12 @@ public class CheckoutTests extends BaseTests    {
         productsPage.openItem(testItemName);
         itemPage.clickAddToCartButton(testItemName);
         itemPage.clickShoppingBasket(testItemName);
-        basketPage.clickCheckoutButton(testItemName);
+        basketPage.clickCheckoutButton();
 
         checkoutPage.clickCancelButton();
         Assert.assertEquals(basketPage.isCheckoutButtonPresent(), true);
-        driver.getWindowHandle();
-        driver.navigate().back();
+
+        productsPage.back();
 
         checkoutPage.setFirstNameInput("kjdsvb");
         checkoutPage.setLastNameInput("djfndf");

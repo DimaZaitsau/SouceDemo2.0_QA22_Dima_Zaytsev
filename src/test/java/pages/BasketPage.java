@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 public class BasketPage extends BasePage{
 
     private final static By ITEM_NAME = By.className("inventory_item_name");
-    private final static By ITEM_DESCRIPTION = By.xpath("//div[@class='inventory_item_desc']");
-    private final static By ITEM_PRICE = By.xpath("//div[@class='inventory_item_price']");
+    private final static By ITEM_DESCRIPTION = By.cssSelector(".inventory_item_desc");
+    private final static By ITEM_PRICE = By.cssSelector(".inventory_item_price");
     private final static By CHECKOUT_BUTTON = By.id("checkout");
-    private final static By REMOVE_BUTTON = By.id("remove-sauce-labs-backpack");
-    private final static By CONTINUE_SHOPPING_BUTTON = By.xpath("//img[@alt='Go back']");
+    private final static By REMOVE_BUTTON = By.xpath("//button[@class='btn btn_secondary btn_small cart_button']");
+    private final static By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
     private final static By NUMBER_OF_ITEMS_IN_BASKET = By.xpath("//span[@class='shopping_cart_badge']");
 
     public BasketPage(WebDriver driver) {
@@ -39,7 +39,7 @@ public class BasketPage extends BasePage{
         return driver.findElement(ITEM_PRICE).getText();
     }
 
-    public void clickCheckoutButton(String itemName)    {
+    public void clickCheckoutButton()    {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
@@ -47,7 +47,7 @@ public class BasketPage extends BasePage{
         driver.findElement(REMOVE_BUTTON).click();
     }
 
-    public void clickContinueShoppingButton(String itemName)    {
+    public void clickContinueShoppingButton()    {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
     }
 
