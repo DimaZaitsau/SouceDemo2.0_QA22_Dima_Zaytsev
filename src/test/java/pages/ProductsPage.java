@@ -55,7 +55,6 @@ public class ProductsPage extends BasePage {
     }
 
     public void back()  {
-        driver.getWindowHandle();
         driver.navigate().back();
     }
 }

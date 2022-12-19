@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class CheckoutTests extends BaseTests    {
 
-    @Test
+    @Test(description = "Performance of input parameters and button", groups = {"slow"})
     public void checkoutTest()  {
         String testItemName = "Sauce Labs Bike Light";
 

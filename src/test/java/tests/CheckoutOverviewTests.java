@@ -5,10 +5,11 @@ import org.testng.annotations.Test;
 
 public class CheckoutOverviewTests extends BaseTests    {
 
-    @Test
+    @Test(description = "Validation of data and buttons", groups = {"slow"})
     public void checkoutOverviewTest()   {
         String testItemName = "Sauce Labs Bike Light";
-        String testItemDescription = "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.";
+        String testItemDescription = "A red light isn't the desired state in testing but it sure helps when riding " +
+                "your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.";
         String testItemPrice = "$9.99";
 
         loginPage.setUsername("standard_user");

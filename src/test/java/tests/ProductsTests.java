@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class ProductsTests extends BaseTests {
 
-    @Test
+    @Test(description = "Checking data, clickability and functionality of buttons", groups = {"slow"})
     public void productsTest()  {
 
         String testItemName = "Sauce Labs Bike Light";

@@ -5,11 +5,14 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTests   {
 
-    @Test
+    @Test(description = "Checking input parameters for login page", groups = {"smoke"})
     public void positiveLoginTest() {
         loginPage.setUsername("standard_user");
         loginPage.setPassword("secret_sauce");
         loginPage.clickLoginButton();
         Assert.assertTrue(productsPage.isShoppingCartButtonPresent());
+        loginPage.clickBurgerButton();
+        loginPage.clickLogoutButton();
+        Assert.assertTrue(loginPage.isLoginButtonPresent());
     }
 }
