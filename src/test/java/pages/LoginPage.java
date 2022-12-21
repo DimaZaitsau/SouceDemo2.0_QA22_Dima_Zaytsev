@@ -10,8 +10,6 @@ public class LoginPage extends BasePage {
     private final static By PASSWORD_INPUT = By.cssSelector("#password");
     private final static By LOGIN_BUTTON = By.cssSelector("#login-button");
     private final static By ERROR_MESSAGE_CONTAINER = By.cssSelector(".error-message-container");
-    private final static By BURGER_BUTTON = By.cssSelector("#react-burger-menu-btn");
-    private final static By LOGOUT_BUTTON = By.cssSelector("#logout_sidebar_link");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -33,13 +31,6 @@ public class LoginPage extends BasePage {
         return driver.findElement(ERROR_MESSAGE_CONTAINER).getText();
     }
 
-    public void clickBurgerButton()  {
-        driver.findElement(BURGER_BUTTON).click();
-    }
-
-    public void clickLogoutButton() {
-        driver.findElement(LOGOUT_BUTTON).click();
-    }
 
     public boolean isLoginButtonPresent()   {
         try {

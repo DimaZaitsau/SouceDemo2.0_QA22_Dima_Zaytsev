@@ -16,11 +16,8 @@ public class ItemTests extends BaseTests    {
 
         productsPage.openItem(testItemName);
 
-        itemPage.getItemName(testItemName);
         Assert.assertEquals(itemPage.getItemName(testItemName), testItemName);
-        itemPage.getItemDescription(testItemName);
         Assert.assertEquals(itemPage.getItemDescription(testItemName), testItemDescription);
-        itemPage.getItemPrice(testItemName);
         Assert.assertEquals(itemPage.getItemPrice(testItemName), testItemPrice);
         itemPage.clickAddToCartButton(testItemName);
         Assert.assertTrue(itemPage.isShoppingBasketFull());

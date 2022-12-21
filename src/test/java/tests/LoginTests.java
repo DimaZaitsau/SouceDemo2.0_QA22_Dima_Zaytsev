@@ -11,8 +11,8 @@ public class LoginTests extends BaseTests   {
         loginPage.setPassword("secret_sauce");
         loginPage.clickLoginButton();
         Assert.assertTrue(productsPage.isShoppingCartButtonPresent());
-        loginPage.clickBurgerButton();
-        loginPage.clickLogoutButton();
+        productsPage.clickBurgerButton();
+        productsPage.clickLogoutButton();
         Assert.assertTrue(loginPage.isLoginButtonPresent());
     }
 }

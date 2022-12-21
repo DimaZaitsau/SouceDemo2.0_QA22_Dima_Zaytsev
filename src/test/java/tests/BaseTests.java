@@ -18,9 +18,8 @@ public abstract class BaseTests {
     protected CheckoutPage checkoutPage;
     protected CheckoutOverviewPage checkoutOverviewPage;
     protected CheckoutCompletePage checkoutCompletePage;
-    protected Sotring sotring;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -34,10 +33,9 @@ public abstract class BaseTests {
         checkoutPage = new CheckoutPage(driver);
         checkoutOverviewPage = new CheckoutOverviewPage(driver);
         checkoutCompletePage = new CheckoutCompletePage(driver);
-        sotring = new Sotring(driver);
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void navigate()  {
         driver.get("https://www.saucedemo.com/");
     }
