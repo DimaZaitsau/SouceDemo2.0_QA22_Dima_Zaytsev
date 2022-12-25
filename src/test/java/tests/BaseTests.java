@@ -3,6 +3,7 @@ package tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -19,13 +20,19 @@ public abstract class BaseTests {
     protected CheckoutOverviewPage checkoutOverviewPage;
     protected CheckoutCompletePage checkoutCompletePage;
 
+    @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+    public void setUp(@Optional("chrome") String browserName) {
+        if (browserName.equals("chrome"))   {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else if (browserName.equals("edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        }
+
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         itemPage = new ItemPage(driver);
@@ -65,6 +72,17 @@ public abstract class BaseTests {
 
                 {"Test.allTheThings() T-Shirt (Red)", "$15.99", "This classic Sauce Labs t-shirt is perfect to wear when " +
                         "cozying up to your keyboard to automate a few tests. Super-soft and comfy ringspun combed cotton."},
+        };
+    }
+
+    @DataProvider(name = "NegativeCheckout")
+    public Object[][] negativeCheckoutList()    {
+        return new Object[][]   {
+                {"", "gsidbnfihnd", "453745"},
+                {"fdhgj", "", "5434768"},
+                {"ijfdhgfd", "fdhgfdjh", ""},
+                {"jfnhog", "lkjngfh", "jfdngo"},
+                {"%£%£%%£", "%£%£%%£", "64386"},
         };
     }
 }

@@ -2,13 +2,11 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.Arrays;
 
 public class ProductsTests extends BaseTests {
-
     @Test(description = "Checking data, clickability and functionality of buttons", groups = {"slow"})
-    public void productsTest() throws InterruptedException {
+    public void productsTest() {
 
         String testItemName = "Sauce Labs Bike Light";
 
@@ -19,7 +17,7 @@ public class ProductsTests extends BaseTests {
         String[] expectedLowToHighSortingItemList = {"Sauce Labs Onesie", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
                 "Test.allTheThings() T-Shirt (Red)", "Sauce Labs Backpack", "Sauce Labs Fleece Jacket"};
         String[] expectedHighToLowSortingItemList = {"Sauce Labs Fleece Jacket", "Sauce Labs Backpack",
-                "Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bolt T-Shirt", "Sauce Labs Bike Light", "Sauce Labs Onesie"};
+                "Sauce Labs Bolt T-Shirt", "Test.allTheThings() T-Shirt (Red)", "Sauce Labs Bike Light", "Sauce Labs Onesie"};
 
         loginPage.setUsername("standard_user");
         loginPage.setPassword("secret_sauce");
@@ -31,15 +29,17 @@ public class ProductsTests extends BaseTests {
         Assert.assertTrue(itemPage.isBackToProductButtonPresent());
         productsPage.back();
 
+        productsPage.clickDropdownButton();
         productsPage.clickSelectAToZ();
-        Assert.assertEquals(productsPage.sortListItemNameAToZ(), Arrays.asList(expectedAToZSortingItemList));
+        Assert.assertEquals(productsPage.getSortListItemName(), Arrays.asList(expectedAToZSortingItemList));
+        productsPage.clickDropdownButton();
         productsPage.clickSelectZToA();
-        Assert.assertEquals(productsPage.sortListItemNameZToA(), Arrays.asList(expectedZToASortingItemList));
-// Почему-то productsPage.sortListItemNameZToA() получается как expectedAToZSortingItemList.
-
+        Assert.assertEquals(productsPage.getSortListItemName(), Arrays.asList(expectedZToASortingItemList));
+        productsPage.clickDropdownButton();
         productsPage.clickSelectLowToHigh();
-        Assert.assertEquals(productsPage.sortListItemNameLowToHigh(), Arrays.asList(expectedLowToHighSortingItemList));
+        Assert.assertEquals(productsPage.getSortListItemName(), Arrays.asList(expectedLowToHighSortingItemList));
+        productsPage.clickDropdownButton();
         productsPage.clickSelectHighToLow();
-        Assert.assertEquals(productsPage.sortListItemNameHighToLow(), Arrays.asList(expectedHighToLowSortingItemList));
+        Assert.assertEquals(productsPage.getSortListItemName(), Arrays.asList(expectedHighToLowSortingItemList));
     }
 }

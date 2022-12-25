@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class CheckoutCompleteTests extends BaseTests {
 
-    @Test(description = "Performance button on the page checkout complete", groups = {"slow"})
+    @Test(description = "Performance button on the page checkout complete", groups = {"regression"})
     public void checkoutCompleteTest()  {
         String testItemName = "Sauce Labs Bike Light";
 

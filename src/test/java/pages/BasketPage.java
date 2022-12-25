@@ -43,7 +43,7 @@ public class BasketPage extends BasePage{
         driver.findElement(CHECKOUT_BUTTON).click();
     }
 
-    public void clickRemoveButton(String itemName)  {
+    public void clickRemoveButton()  {
         driver.findElement(REMOVE_BUTTON).click();
     }
 

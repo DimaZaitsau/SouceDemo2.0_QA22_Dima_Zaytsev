@@ -7,7 +7,7 @@ import pages.Retry;
 public class ItemTests extends BaseTests    {
 
     @Test(dataProvider = "ItemList", retryAnalyzer = Retry.class, description = "Data reconciliation and " +
-            "clickability buttons", groups = {"slow"})
+            "clickability buttons", groups = {"regression"})
     public void itemTest(String testItemName, String testItemPrice, String testItemDescription)  {
 
         loginPage.setUsername("standard_user");

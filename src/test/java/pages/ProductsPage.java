@@ -4,9 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProductsPage extends BasePage {
@@ -20,10 +19,6 @@ public class ProductsPage extends BasePage {
     private final static By DROPDOWN = By.className("product_sort_container");
     private final static By BURGER_BUTTON = By.cssSelector("#react-burger-menu-btn");
     private final static By LOGOUT_BUTTON = By.cssSelector("#logout_sidebar_link");
-    private final static By SELECT_A_TO_Z = By.xpath("//option[@value='az']");
-    private final static By SELECT_Z_TO_A = By.xpath("//option[@value='za']");
-    private final static By SELECT_LOW_TO_HIGH = By.xpath("//option[@value='lohi']");
-    private final static By SELECT_HIGH_TO_LOW = By.xpath("//option[@value='hilo']");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -73,64 +68,35 @@ public class ProductsPage extends BasePage {
         driver.findElement(LOGOUT_BUTTON).click();
     }
 
-    public void clickSelectAToZ()   {
-        driver.findElement(SELECT_A_TO_Z).click();
+    public void clickDropdownButton()   {
+        driver.findElement(DROPDOWN).click();
     }
 
-    public void clickSelectZToA()   {
-        driver.findElement(SELECT_Z_TO_A).click();
+    public Select allOptions()   {
+        Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
+        return select;
+    }
+
+    public void clickSelectAToZ() {
+        allOptions().selectByVisibleText("Name (A to Z)");
+    }
+
+    public void clickSelectZToA()    {
+        allOptions().selectByVisibleText("Name (Z to A)");
     }
 
     public void clickSelectLowToHigh()    {
-        driver.findElement(SELECT_LOW_TO_HIGH).click();
+        allOptions().selectByVisibleText("Price (low to high)");
     }
 
     public void clickSelectHighToLow()    {
-        driver.findElement(SELECT_HIGH_TO_LOW).click();
+        allOptions().selectByVisibleText("Price (high to low)");
     }
 
-    public ArrayList<String> sortListItemNameAToZ() {
-        ArrayList<String> allList1 = new ArrayList<>();
-        List<WebElement> listItemName1 = driver.findElements(ITEM_NAME);
-
-        for (int i = 0; i < listItemName1.size(); i++)   {
-            allList1.add(listItemName1.get(i).getText());
-        }
-        Collections.sort(allList1);
-        return allList1;
-    }
-
-    public ArrayList<String> sortListItemNameZToA() {
-        ArrayList<String> allList2 = new ArrayList<>();
-        List<WebElement> listItemName2 = driver.findElements(ITEM_NAME);
-
-        for (int i = 0; i < listItemName2.size(); i++)   {
-            allList2.add(listItemName2.get(i).getText());
-        }
-        Collections.sort(allList2);
-        return allList2;
-    }
-
-    public ArrayList<String> sortListItemNameLowToHigh() {
-        ArrayList<String> allList3 = new ArrayList<>();
-        List<WebElement> listItemName3 = driver.findElements(ITEM_NAME);
-
-        for (int i = 0; i < listItemName3.size(); i++)   {
-            allList3.add(listItemName3.get(i).getText());
-        }
-        Collections.sort(allList3);
-        return allList3;
-    }
-
-    public ArrayList<String> sortListItemNameHighToLow() {
-        ArrayList<String> allList4 = new ArrayList<>();
-        List<WebElement> listItemName4 = driver.findElements(ITEM_NAME);
-
-        for (int i = 0; i < listItemName4.size(); i++)   {
-            allList4.add(listItemName4.get(i).getText());
-        }
-        Collections.sort(allList4);
-        return allList4;
+    public List<String> getSortListItemName() {
+        List<WebElement> listItemName = driver.findElements(ITEM_NAME);
+        List<String> allItemNameList = listItemName.stream().map(WebElement::getText).toList();
+        return allItemNameList;
     }
 
     public void back()  {

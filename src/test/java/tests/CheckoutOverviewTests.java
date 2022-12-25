@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class CheckoutOverviewTests extends BaseTests    {
 
-    @Test(description = "Validation of data and buttons", groups = {"slow"})
+    @Test(description = "Validation of data and buttons", groups = {"regression"})
     public void checkoutOverviewTest()   {
         String testItemName = "Sauce Labs Bike Light";
         String testItemDescription = "A red light isn't the desired state in testing but it sure helps when riding " +

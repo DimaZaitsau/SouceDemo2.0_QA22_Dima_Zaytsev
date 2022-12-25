@@ -9,13 +9,13 @@ public class CheckoutPage extends BasketPage    {
     private final static By LAST_NAME_INPUT = By.id("last-name");
     private final static By ZIP_CODE_INPUT = By.id("postal-code");
     private final static By CONTINUE_BUTTON = By.id("continue");
-    private final static By CANCEL_BUTTON =By.id("cancel");
+    private final static By CANCEL_BUTTON = By.id("cancel");
 
     public CheckoutPage(WebDriver driver)   {
         super(driver);
     }
 
-    public boolean firstNameInput() {
+    public boolean isFirstNameInputPresent() {
         try {
             driver.findElement(FIRST_NAME_INPUT).isDisplayed();
         } catch (NoSuchElementException ex) {

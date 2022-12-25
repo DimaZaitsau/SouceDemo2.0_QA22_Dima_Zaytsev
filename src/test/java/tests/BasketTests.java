@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class BasketTests extends BaseTests  {
 
-    @Test(description = "Performance of the shopping cart", groups = {"user-profile"})
+    @Test(description = "Performance of the shopping cart", groups = {"regression"})
     public void basketTest()    {
 
         String testItemName = "Sauce Labs Bike Light";
@@ -27,9 +27,9 @@ public class BasketTests extends BaseTests  {
         basketPage.getItemPrice(testItemName);
         Assert.assertEquals(basketPage.getItemPrice(testItemName), testItemPrice);
         basketPage.clickCheckoutButton();
-        Assert.assertTrue(checkoutPage.firstNameInput());
+        Assert.assertTrue(checkoutPage.isFirstNameInputPresent());
         productsPage.back();
-        basketPage.clickRemoveButton(testItemName);
+        basketPage.clickRemoveButton();
         Assert.assertEquals(basketPage.numberOfItemsInBasket(), false);
         basketPage.clickContinueShoppingButton();
         Assert.assertTrue(productsPage.isDropdownPresent());
