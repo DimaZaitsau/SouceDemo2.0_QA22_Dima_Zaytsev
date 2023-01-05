@@ -1,10 +1,12 @@
 package tests;
 
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CheckoutTests extends BaseTests    {
 
+    @Step("The correct functioning on the Checkout page with items")
     @Test(description = "Performance of input parameters and button", groups = {"slow"})
     public void checkoutTest()  {
         String testItemName = "Sauce Labs Bike Light";
@@ -26,6 +28,7 @@ public class CheckoutTests extends BaseTests    {
         Assert.assertTrue(checkoutOverviewPage.isFinishButtonPresent());
     }
 
+    @Step("Input data {testFirstName} {testLastName} {testZipCode}")
     @Test(dataProvider = "NegativeCheckout", description = "Performance of input parameters and button", groups = {"regression"})
     public void negativeCheckoutTest(String testFirstName, String testLastName, String testZipCode) {
         String testItemName = "Sauce Labs Bike Light";
@@ -50,6 +53,7 @@ public class CheckoutTests extends BaseTests    {
         productsPage.clickLogoutButton();
     }
 
+    @Step("The correct functioning on the Checkout page without items")
     @Test(description = "Continue button shouldn't click without item", groups = {"regression"})
     public void negativeCheckoutTestWithoutItem()   {
         String testItemName = "Sauce Labs Bike Light";

@@ -72,25 +72,9 @@ public class ProductsPage extends BasePage {
         driver.findElement(DROPDOWN).click();
     }
 
-    public Select allOptions()   {
+    public void selectSortingOrderOption(String optionName) {
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
-        return select;
-    }
-
-    public void clickSelectAToZ() {
-        allOptions().selectByVisibleText("Name (A to Z)");
-    }
-
-    public void clickSelectZToA()    {
-        allOptions().selectByVisibleText("Name (Z to A)");
-    }
-
-    public void clickSelectLowToHigh()    {
-        allOptions().selectByVisibleText("Price (low to high)");
-    }
-
-    public void clickSelectHighToLow()    {
-        allOptions().selectByVisibleText("Price (high to low)");
+        select.selectByVisibleText(optionName);
     }
 
     public List<String> getSortListItemName() {
