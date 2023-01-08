@@ -1,10 +1,12 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CheckoutOverviewTests extends BaseTests    {
 
+    @Description("Validation of data and buttons in the checkout overview page")
     @Test(description = "Validation of data and buttons", groups = {"regression"})
     public void checkoutOverviewTest()   {
         String testItemName = "Sauce Labs Bike Light";
@@ -23,7 +25,6 @@ public class CheckoutOverviewTests extends BaseTests    {
         checkoutPage.setLastNameInput("djfndf");
         checkoutPage.setZipCodeInput("2356423");
         checkoutPage.clickContinueButton();
-
         checkoutOverviewPage.getItemName(testItemName);
         Assert.assertEquals(checkoutOverviewPage.getItemName(testItemName), testItemName);
         checkoutOverviewPage.getItemDescription(testItemName);
@@ -32,9 +33,7 @@ public class CheckoutOverviewTests extends BaseTests    {
         Assert.assertEquals(checkoutOverviewPage.getItemPrice(testItemName), testItemPrice);
         checkoutOverviewPage.clickCancelButton();
         Assert.assertTrue(productsPage.isDropdownPresent());
-
         productsPage.back();
-
         checkoutOverviewPage.clickShoppingBasketButton();
         Assert.assertTrue(basketPage.isCheckoutButtonPresent());
         productsPage.back();

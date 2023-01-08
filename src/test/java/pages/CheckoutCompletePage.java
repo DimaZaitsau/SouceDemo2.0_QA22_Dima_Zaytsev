@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class CheckoutCompletePage extends BasePage {
         super(driver);
     }
 
+    @Step("Is present finish text")
     public boolean isFinishTextPresent()    {
         try {
             driver.findElement(FINISH_TEXT);
@@ -22,6 +24,7 @@ public class CheckoutCompletePage extends BasePage {
         return true;
     }
 
+    @Step("Click back home button")
     public void clickBackHomeButton()   {
         driver.findElement(BACK_HOME_BUTTON).click();
     }

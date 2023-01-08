@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ public class ItemPage extends BasePage  {
         super(driver);
     }
 
+    @Step("Is present back to product button")
     public boolean isBackToProductButtonPresent()   {
         try {
             driver.findElement(BACK_TO_PRODUCT_BUTTON);
@@ -26,6 +28,7 @@ public class ItemPage extends BasePage  {
         return true;
     }
 
+    @Step("Have some products in the shopping basket")
     public boolean isShoppingBasketFull()   {
         try {
             driver.findElement(SHOPPING_BASKET_FULL);
@@ -35,22 +38,27 @@ public class ItemPage extends BasePage  {
         return true;
     }
 
+    @Step("Get item name")
     public String getItemName(String itemName)  {
         return driver.findElement(ITEM_NAME).getText();
     }
 
+    @Step("Get item description")
     public String getItemDescription(String itemName)   {
         return driver.findElement(ITEM_DESCRIPTION).getText();
     }
 
+    @Step("Click add to cart button")
     public void clickAddToCartButton(String itemName)   {
         driver.findElement(ADD_TO_CART_BUTTON).click();
     }
 
+    @Step("Get item price")
     public String getItemPrice(String itemName) {
         return driver.findElement(ITEM_PRICE).getText();
     }
 
+    @Step("Click shopping basket button")
     public void clickShoppingBasket(String itemName)    {
         driver.findElement(SHOPPING_BASKET).click();
     }
