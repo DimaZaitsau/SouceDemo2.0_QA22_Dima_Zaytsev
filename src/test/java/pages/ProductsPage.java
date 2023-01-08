@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,8 @@ public class ProductsPage extends BasePage {
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
+
+    @Step("Is present dropdown button on the products page")
     public boolean isDropdownPresent()  {
         try {
             driver.findElement(DROPDOWN);
@@ -31,6 +34,8 @@ public class ProductsPage extends BasePage {
         }
         return true;
     }
+
+    @Step("Is present shopping cart button on the products page")
     public boolean isShoppingCartButtonPresent()    {
         try {
             driver.findElement(SHOPPING_CART_BUTTON);
@@ -40,43 +45,53 @@ public class ProductsPage extends BasePage {
         return true;
     }
 
+    @Step("Get item name in container")
     public String getItemPrice(String itemName)   {
         return driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_PRICE).getText();
     }
 
+    @Step("Get item description in container")
     public String getItemDescription(String itemName) {
         return driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_DESCRIPTION).getText();
     }
 
+    @Step("Click on add to cart button in container in the products page")
     public void clickAddToCartButton(String itemName)   {
         driver.findElement(getItemContainerByName(itemName)).findElement(ADD_TO_CART_BUTTON).click();
     }
 
+    @Step("Click on item name for open item page")
     public void openItem(String itemName) {
         driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_BUTTON).click();
     }
 
+    @Step("Get item container by name")
     private By getItemContainerByName(String itemName)    {
         return By.xpath(String.format(ITEM_CONTAINER_LOCATOR, itemName));
     }
 
+    @Step("Click burger button")
     public void clickBurgerButton()  {
         driver.findElement(BURGER_BUTTON).click();
     }
 
+    @Step("Click logout button")
     public void clickLogoutButton() {
         driver.findElement(LOGOUT_BUTTON).click();
     }
 
+    @Step("Click dropdown button")
     public void clickDropdownButton()   {
         driver.findElement(DROPDOWN).click();
     }
 
+    @Step("Select sorting option by option name = {optionName}")
     public void selectSortingOrderOption(String optionName) {
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
         select.selectByVisibleText(optionName);
     }
 
+    @Step("Get actual collection item names on page")
     public List<String> getSortListItemName() {
         List<WebElement> listItemName = driver.findElements(ITEM_NAME);
         List<String> allItemNameList = listItemName.stream().map(WebElement::getText).toList();

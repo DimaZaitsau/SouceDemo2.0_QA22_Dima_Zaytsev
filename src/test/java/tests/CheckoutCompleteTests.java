@@ -1,12 +1,12 @@
 package tests;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CheckoutCompleteTests extends BaseTests {
 
-    @Step("Correct functioning on the Checkout Complete Page")
+    @Description("Button functionality on the checkout complete page")
     @Test(description = "Performance button on the page checkout complete", groups = {"regression"})
     public void checkoutCompleteTest()  {
         String testItemName = "Sauce Labs Bike Light";

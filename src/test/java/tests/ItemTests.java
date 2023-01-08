@@ -1,13 +1,13 @@
 package tests;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Retry;
 
 public class ItemTests extends BaseTests    {
 
-    @Step("Data compliance {testItemName} -- {testItemDescription} -- {testItemPrice}")
+    @Description("Data consistency check in the item page")
     @Test(dataProvider = "ItemList", retryAnalyzer = Retry.class, description = "Data reconciliation and " +
             "clickability buttons", groups = {"regression"})
     public void itemTest(String testItemName, String testItemPrice, String testItemDescription)  {

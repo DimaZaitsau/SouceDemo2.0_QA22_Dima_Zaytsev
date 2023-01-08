@@ -1,12 +1,12 @@
 package tests;
 
-import io.qameta.allure.Step;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BasketTests extends BaseTests  {
 
-    @Step("Data compliance on the Basket Page")
+    @Description("Check if the shopping cart is working properly")
     @Test(description = "Performance of the shopping cart", groups = {"regression"})
     public void basketTest()    {
 

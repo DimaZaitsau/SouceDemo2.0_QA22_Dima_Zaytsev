@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -15,23 +16,27 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Click login button")
     public void clickLoginButton()  {
         driver.findElement(LOGIN_BUTTON).click();
     }
 
+    @Step("Input username = {username}")
     public void setUsername(String username)   {
         driver.findElement(USERNAME_INPUT_LOCATOR).sendKeys(username);
     }
 
+    @Step("Input password = {password}")
     public void setPassword(String password)    {
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
     }
 
+    @Step("Get error message")
     public String getErrorMessageText()  {
         return driver.findElement(ERROR_MESSAGE_CONTAINER).getText();
     }
 
-
+    @Step("Is present login button")
     public boolean isLoginButtonPresent()   {
         try {
             driver.findElement(LOGIN_BUTTON);
