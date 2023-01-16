@@ -11,21 +11,26 @@ public class CheckoutTests extends BaseTests    {
     public void checkoutTest()  {
         String testItemName = "Sauce Labs Bike Light";
 
-        loginPage.setUsername("standard_user");
-        loginPage.setPassword("secret_sauce");
-        loginPage.clickLoginButton();
-        productsPage.openItem(testItemName);
-        itemPage.clickAddToCartButton(testItemName);
-        itemPage.clickShoppingBasket(testItemName);
-        basketPage.clickCheckoutButton();
-        checkoutPage.clickCancelButton();
-        Assert.assertEquals(basketPage.isCheckoutButtonPresent(), true);
+        boolean isPageOpened = loginPage
+                .setUsername("standard_user")
+                .setPassword("secret_sauce")
+                .clickLoginButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "ProductsPage is not opened");
+        isPageOpened = productsPage.openItem(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "ItemPage is not opened");
+        isPageOpened = itemPage.clickAddToCartButton(testItemName)
+        .clickShoppingBasket(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "BasketPage is not opened");
+        isPageOpened = basketPage.clickCheckoutButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "CheckoutPage is not opened");
+        isPageOpened = checkoutPage.clickCancelButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "BasketPage is not opened");
         productsPage.back();
-        checkoutPage.setFirstNameInput("kjdsvb");
-        checkoutPage.setLastNameInput("djfndf");
-        checkoutPage.setZipCodeInput("2356423");
-        checkoutPage.clickContinueButton();
-        Assert.assertTrue(checkoutOverviewPage.isFinishButtonPresent());
+        isPageOpened = checkoutPage.setFirstNameInput("kjdsvb")
+                .setLastNameInput("djfndf")
+                .setZipCodeInput("2356423")
+                .clickContinueButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "CheckoutOverviewPage is not opened");
     }
 
     @Description("Check negative input parameters and buttons in the checkout page")
@@ -33,24 +38,30 @@ public class CheckoutTests extends BaseTests    {
     public void negativeCheckoutTest(String testFirstName, String testLastName, String testZipCode) {
         String testItemName = "Sauce Labs Bike Light";
 
-        loginPage.setUsername("standard_user");
-        loginPage.setPassword("secret_sauce");
-        loginPage.clickLoginButton();
-        productsPage.openItem(testItemName);
-        itemPage.clickAddToCartButton(testItemName);
-        itemPage.clickShoppingBasket(testItemName);
-        basketPage.clickCheckoutButton();
-        checkoutPage.clickCancelButton();
+        boolean isPageOpened = loginPage
+                .setUsername("standard_user")
+                .setPassword("secret_sauce")
+                .clickLoginButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "ProductsPage is not opened");
+        isPageOpened = productsPage.openItem(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "ItemPage is not opened");
+        isPageOpened = itemPage.clickAddToCartButton(testItemName)
+                .clickShoppingBasket(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "BasketPage is not opened");
+        isPageOpened = basketPage.clickCheckoutButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "CheckoutPage is not opened");
+        isPageOpened = checkoutPage.clickCancelButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "BasketPage is not opened");
         productsPage.back();
-        checkoutPage.setFirstNameInput(testFirstName);
-        checkoutPage.setLastNameInput(testLastName);
-        checkoutPage.setZipCodeInput(testZipCode);
-        checkoutPage.clickContinueButton();
+        checkoutPage.setFirstNameInput(testFirstName)
+                .setLastNameInput(testLastName)
+                .setZipCodeInput(testZipCode)
+                .clickContinueButton();
         Assert.assertTrue(checkoutPage.isFirstNameInputPresent());
         productsPage.back();
         basketPage.clickRemoveButton();
-        productsPage.clickBurgerButton();
-        productsPage.clickLogoutButton();
+        isPageOpened = productsPage.clickBurgerButton().clickLogoutButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "LoginPage is not opened");
     }
 
     @Description("Check input parameters and button in the checkout page without item")
@@ -58,16 +69,22 @@ public class CheckoutTests extends BaseTests    {
     public void negativeCheckoutTestWithoutItem()   {
         String testItemName = "Sauce Labs Bike Light";
 
-        loginPage.setUsername("standard_user");
-        loginPage.setPassword("secret_sauce");
-        loginPage.clickLoginButton();
-        productsPage.openItem(testItemName);
-        itemPage.clickShoppingBasket(testItemName);
-        basketPage.clickCheckoutButton();
-        checkoutPage.setFirstNameInput("kjdsvb");
-        checkoutPage.setLastNameInput("djfndf");
-        checkoutPage.setZipCodeInput("2356423");
-        checkoutPage.clickContinueButton();
+        boolean isPageOpened = loginPage
+                .setUsername("standard_user")
+                .setPassword("secret_sauce")
+                .clickLoginButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "ProductsPage is not opened");
+        isPageOpened = productsPage.openItem(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "ItemPage is not opened");
+        isPageOpened = itemPage.clickAddToCartButton(testItemName)
+                .clickShoppingBasket(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpened, "BasketPage is not opened");
+        isPageOpened = basketPage.clickCheckoutButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "CheckoutPage is not opened");
+        checkoutPage.setFirstNameInput("kjdsvb")
+        .setLastNameInput("djfndf")
+        .setZipCodeInput("2356423")
+        .clickContinueButton();
         Assert.assertTrue(checkoutPage.isFirstNameInputPresent());
     }
 }

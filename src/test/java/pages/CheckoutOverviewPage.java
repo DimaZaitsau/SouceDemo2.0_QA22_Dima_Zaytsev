@@ -1,60 +1,66 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutOverviewPage extends BasePage  {
 
-    private final static By ITEM_NAME = By.xpath("//div[@class='inventory_item_name']");
-    private final static By ITEM_DESCRIPTION = By.cssSelector(".inventory_item_desc");
-    private final static By ITEM_PRICE = By.cssSelector(".inventory_item_price");
-    private final static By CANCEL_BUTTON = By.id("cancel");
-    private final static By SHOPPING_BASKET_BUTTON = By.xpath("//a[@class='shopping_cart_link']");
-    private final static By FINISH_BUTTON = By.id("finish");
+    @FindBy(xpath = "//div[@class='inventory_item_name']")
+    private WebElement ITEM_NAME;
+    @FindBy(css = ".inventory_item_desc")
+    private WebElement ITEM_DESCRIPTION;
+    @FindBy(css = ".inventory_item_price")
+    private WebElement ITEM_PRICE;
+    @FindBy(id = "cancel")
+    private WebElement CANCEL_BUTTON;
+    @FindBy(xpath = "//a[@class='shopping_cart_link']")
+    private WebElement SHOPPING_BASKET_BUTTON;
+    @FindBy(id = "finish")
+    private WebElement FINISH_BUTTON;
 
     public CheckoutOverviewPage(WebDriver driver)   {
         super(driver);
-    }
-
-    @Step("Is present finish button")
-    public boolean isFinishButtonPresent()  {
-        try {
-            driver.findElement(FINISH_BUTTON);
-        }   catch (NoSuchElementException ex)   {
-            return false;
-        }
-        return true;
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Get item name")
     public String getItemName(String itemName)  {
-        return driver.findElement(ITEM_NAME).getText();
+        return ITEM_NAME.getText();
     }
 
     @Step("Get item description")
     public String getItemDescription(String itemName)   {
-        return driver.findElement(ITEM_DESCRIPTION).getText();
+        return ITEM_DESCRIPTION.getText();
     }
 
     @Step("Get item price")
     public String getItemPrice(String itemName) {
-        return driver.findElement(ITEM_PRICE).getText();
+        return ITEM_PRICE.getText();
     }
 
     @Step("Click cancel button")
-    public void clickCancelButton() {
-        driver.findElement(CANCEL_BUTTON).click();
+    public ProductsPage clickCancelButton() {
+        CANCEL_BUTTON.click();
+        return new ProductsPage(driver);
     }
 
     @Step("Click shopping basket button")
-    public void clickShoppingBasketButton() {
-        driver.findElement(SHOPPING_BASKET_BUTTON).click();
+    public BasketPage clickShoppingBasketButton() {
+        SHOPPING_BASKET_BUTTON.click();
+        return new BasketPage(driver);
     }
 
     @Step("Click finish button")
-    public void clickFinishButton() {
-        driver.findElement(FINISH_BUTTON).click();
+    public CheckoutCompletePage clickFinishButton() {
+        FINISH_BUTTON.click();
+        return new CheckoutCompletePage(driver);
+    }
+
+    @Override
+    public boolean isPageOpen() {
+        return FINISH_BUTTON.isDisplayed();
     }
 }

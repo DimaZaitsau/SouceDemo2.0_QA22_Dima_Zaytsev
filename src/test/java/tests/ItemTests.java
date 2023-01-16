@@ -12,16 +12,19 @@ public class ItemTests extends BaseTests    {
             "clickability buttons", groups = {"regression"})
     public void itemTest(String testItemName, String testItemPrice, String testItemDescription)  {
 
-        loginPage.setUsername("standard_user");
-        loginPage.setPassword("secret_sauce");
-        loginPage.clickLoginButton();
-        productsPage.openItem(testItemName);
+        boolean isPageOpen = loginPage.setUsername("standard_user")
+        .setPassword("secret_sauce")
+        .clickLoginButton().isPageOpen();
+        Assert.assertTrue(isPageOpen, "ProductsPage is not opened");
+
+        isPageOpen = productsPage.openItem(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpen, "ItemPage is not opened");
         Assert.assertEquals(itemPage.getItemName(testItemName), testItemName);
         Assert.assertEquals(itemPage.getItemDescription(testItemName), testItemDescription);
         Assert.assertEquals(itemPage.getItemPrice(testItemName), testItemPrice);
         itemPage.clickAddToCartButton(testItemName);
         Assert.assertTrue(itemPage.isShoppingBasketFull());
-        itemPage.clickShoppingBasket(testItemName);
-        Assert.assertTrue(basketPage.isCheckoutButtonPresent());
+        isPageOpen = itemPage.clickShoppingBasket(testItemName).isPageOpen();
+        Assert.assertTrue(isPageOpen, "ShoppingBasket in not opened");
     }
 }
