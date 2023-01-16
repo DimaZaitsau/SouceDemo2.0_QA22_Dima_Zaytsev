@@ -9,12 +9,14 @@ public class LoginTests extends BaseTests   {
     @Description("Check login page and logout")
     @Test(description = "Checking input parameters for login page", groups = {"smoke"})
     public void positiveLoginTest() {
-        loginPage.setUsername("standard_user");
-        loginPage.setPassword("secret_sauce");
-        loginPage.clickLoginButton();
-        Assert.assertTrue(productsPage.isShoppingCartButtonPresent());
-        productsPage.clickBurgerButton();
-        productsPage.clickLogoutButton();
-        Assert.assertTrue(loginPage.isLoginButtonPresent());
+        boolean isPageOpened = loginPage
+                .setUsername("standard_user")
+                .setPassword("secret_sauce")
+                .clickLoginButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "ProductsPage is not opened");
+        isPageOpened = productsPage
+                .clickBurgerButton()
+                .clickLogoutButton().isPageOpen();
+        Assert.assertTrue(isPageOpened, "LoginPage is not opened");
     }
 }

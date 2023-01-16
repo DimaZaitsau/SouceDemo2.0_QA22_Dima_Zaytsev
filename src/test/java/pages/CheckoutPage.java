@@ -1,25 +1,33 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutPage extends BasketPage    {
-    private final static By FIRST_NAME_INPUT = By.id("first-name");
-    private final static By LAST_NAME_INPUT = By.id("last-name");
-    private final static By ZIP_CODE_INPUT = By.id("postal-code");
-    private final static By CONTINUE_BUTTON = By.id("continue");
-    private final static By CANCEL_BUTTON = By.id("cancel");
+    @FindBy(id = "first-name")
+    private WebElement FIRST_NAME_INPUT;
+    @FindBy(id = "last-name")
+    private WebElement LAST_NAME_INPUT;
+    @FindBy(id = "postal-code")
+    private WebElement ZIP_CODE_INPUT;
+    @FindBy(id = "continue")
+    private WebElement CONTINUE_BUTTON;
+    @FindBy(id = "cancel")
+    private WebElement CANCEL_BUTTON;
 
     public CheckoutPage(WebDriver driver)   {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Is present first name input")
     public boolean isFirstNameInputPresent() {
         try {
-            driver.findElement(FIRST_NAME_INPUT).isDisplayed();
+            FIRST_NAME_INPUT.isDisplayed();
         } catch (NoSuchElementException ex) {
             return false;
         }
@@ -27,27 +35,37 @@ public class CheckoutPage extends BasketPage    {
     }
 
     @Step("Input first name")
-    public void setFirstNameInput(String firstName) {
-        driver.findElement(FIRST_NAME_INPUT).sendKeys(firstName);
+    public CheckoutPage setFirstNameInput(String firstName) {
+        FIRST_NAME_INPUT.sendKeys(firstName);
+        return this;
     }
 
     @Step("Input last name")
-    public void setLastNameInput(String lastName)   {
-        driver.findElement(LAST_NAME_INPUT).sendKeys(lastName);
+    public CheckoutPage setLastNameInput(String lastName)   {
+        LAST_NAME_INPUT.sendKeys(lastName);
+        return this;
     }
 
     @Step("Input zip code")
-    public void setZipCodeInput(String zipCode) {
-        driver.findElement(ZIP_CODE_INPUT).sendKeys(zipCode);
+    public CheckoutPage setZipCodeInput(String zipCode) {
+        ZIP_CODE_INPUT.sendKeys(zipCode);
+        return this;
     }
 
     @Step("Click continue button")
-    public void clickContinueButton()   {
-        driver.findElement(CONTINUE_BUTTON).click();
+    public CheckoutOverviewPage clickContinueButton()   {
+        CONTINUE_BUTTON.click();
+        return new CheckoutOverviewPage(driver);
     }
 
     @Step("Click cancel button")
-    public void clickCancelButton() {
-        driver.findElement(CANCEL_BUTTON).click();
+    public BasketPage clickCancelButton() {
+        CANCEL_BUTTON.click();
+        return new BasketPage(driver);
+    }
+
+    @Override
+    public boolean isPageOpen() {
+        return CONTINUE_BUTTON.isDisplayed();
     }
 }

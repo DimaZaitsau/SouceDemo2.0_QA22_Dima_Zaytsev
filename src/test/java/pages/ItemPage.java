@@ -1,27 +1,37 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class ItemPage extends BasePage  {
-    private final static By BACK_TO_PRODUCT_BUTTON = By.id("back-to-products");
-    private final static By ITEM_NAME = By.xpath("//div[@class='inventory_details_name large_size']");
-    private final static By ITEM_DESCRIPTION = By.xpath("//div[@class='inventory_details_desc large_size']");
-    private final static By ADD_TO_CART_BUTTON = By.xpath("//button[@class='btn btn_primary btn_small btn_inventory']");
-    private final static By ITEM_PRICE = By.className("inventory_details_price");
-    private final static By SHOPPING_BASKET = By.className("shopping_cart_link");
-    private final static By SHOPPING_BASKET_FULL = By.xpath("//span[@class='shopping_cart_badge']");
+    @FindBy(id = "back-to-products")
+    private WebElement BACK_TO_PRODUCT_BUTTON;
+    @FindBy(xpath = "//div[@class='inventory_details_name large_size']")
+    private WebElement ITEM_NAME;
+    @FindBy(xpath = "//div[@class='inventory_details_desc large_size']")
+    private WebElement ITEM_DESCRIPTION;
+    @FindBy(xpath = "//button[@class='btn btn_primary btn_small btn_inventory']")
+    private WebElement ADD_TO_CART_BUTTON;
+    @FindBy(className = "inventory_details_price")
+    private WebElement ITEM_PRICE;
+    @FindBy(className = "shopping_cart_link")
+    private WebElement SHOPPING_BASKET;
+    @FindBy(xpath = "//span[@class='shopping_cart_badge']")
+    private WebElement SHOPPING_BASKET_FULL;
 
     public ItemPage(WebDriver driver)   {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Is present back to product button")
     public boolean isBackToProductButtonPresent()   {
         try {
-            driver.findElement(BACK_TO_PRODUCT_BUTTON);
+            BACK_TO_PRODUCT_BUTTON.isDisplayed();
         } catch (NoSuchElementException ex) {
             return false;
         }
@@ -31,7 +41,7 @@ public class ItemPage extends BasePage  {
     @Step("Have some products in the shopping basket")
     public boolean isShoppingBasketFull()   {
         try {
-            driver.findElement(SHOPPING_BASKET_FULL);
+            SHOPPING_BASKET_FULL.isDisplayed();
         } catch (NoSuchElementException ex) {
             return false;
         }
@@ -40,26 +50,33 @@ public class ItemPage extends BasePage  {
 
     @Step("Get item name")
     public String getItemName(String itemName)  {
-        return driver.findElement(ITEM_NAME).getText();
+        return ITEM_NAME.getText();
     }
 
     @Step("Get item description")
     public String getItemDescription(String itemName)   {
-        return driver.findElement(ITEM_DESCRIPTION).getText();
+        return ITEM_DESCRIPTION.getText();
     }
 
     @Step("Click add to cart button")
-    public void clickAddToCartButton(String itemName)   {
-        driver.findElement(ADD_TO_CART_BUTTON).click();
+    public ItemPage clickAddToCartButton(String itemName)   {
+        ADD_TO_CART_BUTTON.click();
+        return new ItemPage(driver);
     }
 
     @Step("Get item price")
     public String getItemPrice(String itemName) {
-        return driver.findElement(ITEM_PRICE).getText();
+        return ITEM_PRICE.getText();
     }
 
     @Step("Click shopping basket button")
-    public void clickShoppingBasket(String itemName)    {
-        driver.findElement(SHOPPING_BASKET).click();
+    public BasketPage clickShoppingBasket(String itemName)    {
+        SHOPPING_BASKET.click();
+        return new BasketPage(driver);
+    }
+
+    @Override
+    public boolean isPageOpen() {
+        return BACK_TO_PRODUCT_BUTTON.isDisplayed();
     }
 }

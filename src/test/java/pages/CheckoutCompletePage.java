@@ -1,31 +1,31 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CheckoutCompletePage extends BasePage {
-    private final static By FINISH_TEXT = By.xpath("//h2[@class='complete-header']");
-    private final static By BACK_HOME_BUTTON = By.id("back-to-products");
+    @FindBy(xpath = "//h2[@class='complete-header']")
+    private WebElement FINISH_TEXT;
+    @FindBy(id = "back-to-products")
+    private WebElement BACK_HOME_BUTTON;
 
 
     public CheckoutCompletePage(WebDriver driver)  {
         super(driver);
-    }
-
-    @Step("Is present finish text")
-    public boolean isFinishTextPresent()    {
-        try {
-            driver.findElement(FINISH_TEXT);
-        } catch (NoSuchElementException ex) {
-            return false;
-        }
-        return true;
+        PageFactory.initElements(driver, this);
     }
 
     @Step("Click back home button")
-    public void clickBackHomeButton()   {
-        driver.findElement(BACK_HOME_BUTTON).click();
+    public ProductsPage clickBackHomeButton()   {
+        BACK_HOME_BUTTON.click();
+        return new ProductsPage(driver);
+    }
+
+    @Override
+    public boolean isPageOpen() {
+        return BACK_HOME_BUTTON.isDisplayed();
     }
 }
