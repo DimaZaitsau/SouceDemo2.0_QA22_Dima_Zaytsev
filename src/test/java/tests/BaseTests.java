@@ -1,6 +1,8 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -13,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public abstract class BaseTests {
+    protected final Logger logger = LogManager.getLogger(this.getClass().getName());
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected ProductsPage productsPage;
@@ -78,6 +81,7 @@ public abstract class BaseTests {
 
     @DataProvider(name = "NegativeCheckout")
     public Object[][] negativeCheckoutList()    {
+        logger.info("Setting checkout value firstName {}, lastName {} zipCode {}");
         return new Object[][]   {
                 {"", "gsidbnfihnd", "453745"},
                 {"fdhgj", "", "5434768"},

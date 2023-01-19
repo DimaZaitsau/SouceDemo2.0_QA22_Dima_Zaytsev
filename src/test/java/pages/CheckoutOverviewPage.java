@@ -28,39 +28,46 @@ public class CheckoutOverviewPage extends BasePage  {
 
     @Step("Get item name")
     public String getItemName(String itemName)  {
+        logger.info("Getting itemName");
         return ITEM_NAME.getText();
     }
 
     @Step("Get item description")
     public String getItemDescription(String itemName)   {
+        logger.info("Getting itemDescription");
         return ITEM_DESCRIPTION.getText();
     }
 
     @Step("Get item price")
     public String getItemPrice(String itemName) {
+        logger.info("Getting itemPrice");
         return ITEM_PRICE.getText();
     }
 
     @Step("Click cancel button")
     public ProductsPage clickCancelButton() {
+        logger.info("Clicking cancelButton");
         CANCEL_BUTTON.click();
         return new ProductsPage(driver);
     }
 
     @Step("Click shopping basket button")
     public BasketPage clickShoppingBasketButton() {
+        logger.info("Clicking shoppingBasketButton");
         SHOPPING_BASKET_BUTTON.click();
         return new BasketPage(driver);
     }
 
     @Step("Click finish button")
     public CheckoutCompletePage clickFinishButton() {
+        logger.info("Clicking finishButton");
         FINISH_BUTTON.click();
         return new CheckoutCompletePage(driver);
     }
 
     @Override
     public boolean isPageOpen() {
+        logger.info("Is present finishButton");
         return FINISH_BUTTON.isDisplayed();
     }
 }

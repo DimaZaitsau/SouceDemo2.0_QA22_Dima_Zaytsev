@@ -24,18 +24,21 @@ public class LoginPage extends BasePage {
 
     @Step("Click login button")
     public ProductsPage clickLoginButton()  {
+        logger.info("Clicking login button");
         LOGIN_BUTTON.click();
         return new ProductsPage(driver);
     }
 
     @Step("Input username = {username}")
     public LoginPage setUsername(String username)   {
+        logger.debug("Setting username value {}", username);
         USERNAME_INPUT_LOCATOR.sendKeys(username);
         return this;
     }
 
     @Step("Input password = {password}")
     public LoginPage setPassword(String password)    {
+        logger.debug("Setting password value {}", password);
         PASSWORD_INPUT.sendKeys(password);
         return this;
     }
@@ -47,6 +50,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public boolean isPageOpen()    {
+        logger.info("Is present loginButton");
         return LOGIN_BUTTON.isDisplayed();
     }
 }

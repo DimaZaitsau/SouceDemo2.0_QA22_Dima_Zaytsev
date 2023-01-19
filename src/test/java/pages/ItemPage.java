@@ -41,6 +41,7 @@ public class ItemPage extends BasePage  {
     @Step("Have some products in the shopping basket")
     public boolean isShoppingBasketFull()   {
         try {
+            logger.info("Is shoppingBasketFull");
             SHOPPING_BASKET_FULL.isDisplayed();
         } catch (NoSuchElementException ex) {
             return false;
@@ -50,33 +51,39 @@ public class ItemPage extends BasePage  {
 
     @Step("Get item name")
     public String getItemName(String itemName)  {
+        logger.info("Getting itemName");
         return ITEM_NAME.getText();
     }
 
     @Step("Get item description")
     public String getItemDescription(String itemName)   {
+        logger.info("Getting itemDescription");
         return ITEM_DESCRIPTION.getText();
     }
 
     @Step("Click add to cart button")
     public ItemPage clickAddToCartButton(String itemName)   {
+        logger.info("Clicking addToCartButton");
         ADD_TO_CART_BUTTON.click();
         return new ItemPage(driver);
     }
 
     @Step("Get item price")
     public String getItemPrice(String itemName) {
+        logger.info("Getting itemPrice");
         return ITEM_PRICE.getText();
     }
 
     @Step("Click shopping basket button")
     public BasketPage clickShoppingBasket(String itemName)    {
+        logger.info("Clicking shoppingBasket");
         SHOPPING_BASKET.click();
         return new BasketPage(driver);
     }
 
     @Override
     public boolean isPageOpen() {
+        logger.info("Is present backToProductButton");
         return BACK_TO_PRODUCT_BUTTON.isDisplayed();
     }
 }
