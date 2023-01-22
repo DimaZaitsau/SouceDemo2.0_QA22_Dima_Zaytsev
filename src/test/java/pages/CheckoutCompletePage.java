@@ -20,12 +20,14 @@ public class CheckoutCompletePage extends BasePage {
 
     @Step("Click back home button")
     public ProductsPage clickBackHomeButton()   {
+        logger.info("Clicking backHomeButton");
         BACK_HOME_BUTTON.click();
         return new ProductsPage(driver);
     }
 
     @Override
     public boolean isPageOpen() {
+        logger.info("Is present backHomeButton");
         return BACK_HOME_BUTTON.isDisplayed();
     }
 }

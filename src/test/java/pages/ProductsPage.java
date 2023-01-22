@@ -35,6 +35,7 @@ public class ProductsPage extends BasePage {
     @Step("Is present dropdown button on the products page")
     public boolean isDropdownPresent()  {
         try {
+            logger.info("Is present dropdownButton");
              DROPDOWN.isDisplayed();
         } catch (NoSuchElementException ex) {
             return false;
@@ -44,50 +45,59 @@ public class ProductsPage extends BasePage {
 
     @Step("Get item name in container")
     public String getItemPrice(String itemName)   {
+        logger.info("Getting itemPrice by name value {}", itemName);
         return driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_PRICE).getText();
     }
 
     @Step("Get item description in container")
     public String getItemDescription(String itemName) {
+        logger.info("Getting itemDescription by name value {}", itemName);
         return driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_DESCRIPTION).getText();
     }
 
     @Step("Click on add to cart button in container in the products page")
     public void clickAddToCartButton(String itemName)   {
+        logger.info("Clicking addToCartButton by name {}", itemName);
         driver.findElement(getItemContainerByName(itemName)).findElement(ADD_TO_CART_BUTTON).click();
     }
 
     @Step("Click on item name for open item page")
     public ItemPage openItem(String itemName) {
+        logger.info("Clicking item link by name {}", itemName);
         driver.findElement(getItemContainerByName(itemName)).findElement(ITEM_BUTTON).click();
         return new ItemPage(driver);
     }
 
     @Step("Get item container by name")
     private By getItemContainerByName(String itemName)    {
+        logger.info("Getting itemContainerByName {}", itemName);
         return By.xpath(String.format(ITEM_CONTAINER_LOCATOR, itemName));
     }
 
     @Step("Click burger button")
     public ProductsPage clickBurgerButton()  {
+        logger.info("Clicking burgerButton");
         BURGER_BUTTON.click();
         return this;
     }
 
     @Step("Click logout button")
     public LoginPage clickLogoutButton() {
+        logger.info("Clicking logoutButton");
         LOGOUT_BUTTON.click();
         return new LoginPage(driver);
     }
 
     @Step("Click dropdown button")
     public ProductsPage clickDropdownButton()   {
+        logger.info("Clicking dropdownButton");
         DROPDOWN.click();
         return new ProductsPage(driver);
     }
 
     @Step("Select sorting option by option name = {optionName}")
     public ProductsPage selectSortingOrderOption(String optionName) {
+        logger.info("Selecting option in dropdown value{}", optionName);
         Select select = new Select(driver.findElement(By.cssSelector(".product_sort_container")));
         select.selectByVisibleText(optionName);
         return new ProductsPage(driver);
@@ -95,6 +105,7 @@ public class ProductsPage extends BasePage {
 
     @Step("Get actual collection item names on page")
     public List<String> getSortListItemName() {
+        logger.info("Getting sort item list");
         List<WebElement> listItemName = driver.findElements(ITEM_NAME);
         List<String> allItemNameList = listItemName.stream().map(WebElement::getText).toList();
         return allItemNameList;
@@ -102,6 +113,7 @@ public class ProductsPage extends BasePage {
 
     @Override
     public boolean isPageOpen()    {
+        logger.info("Is present shoppingCartButton");
         return SHOPPING_CART_BUTTON.isDisplayed();
     }
 

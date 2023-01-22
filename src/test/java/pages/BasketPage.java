@@ -32,33 +32,39 @@ public class BasketPage extends BasePage{
 
     @Step("Get item name")
     public String getItemName(String itemName)  {
+        logger.info("Getting itemName");
         return ITEM_NAME.getText();
     }
 
     @Step("Get item description")
     public String getItemDescription(String itemName)   {
+        logger.info("Getting itemDescription");
         return ITEM_DESCRIPTION.getText();
     }
 
     @Step("Get item price")
     public String getItemPrice(String itemName) {
+        logger.info("Getting itemPrice");
         return ITEM_PRICE.getText();
     }
 
     @Step("Click checkout button")
     public CheckoutPage clickCheckoutButton()    {
+        logger.info("Clicking checkoutButton");
         CHECKOUT_BUTTON.click();
         return new CheckoutPage(driver);
     }
 
     @Step("Click remove button")
     public BasketPage clickRemoveButton()  {
+        logger.info("Clicking removeButton");
         REMOVE_BUTTON.click();
         return new BasketPage(driver);
     }
 
     @Step("Click continue shopping button")
     public ProductsPage clickContinueShoppingButton()    {
+        logger.info("Clicking continueShoppingButton");
         CONTINUE_SHOPPING_BUTTON.click();
         return new ProductsPage(driver);
     }
@@ -66,6 +72,7 @@ public class BasketPage extends BasePage{
     @Step("Have some items in basket")
     public boolean numberOfItemsInBasket()  {
         try {
+            logger.info("Have some items in basket");
             NUMBER_OF_ITEMS_IN_BASKET.isDisplayed();
         }   catch (NoSuchElementException ex)   {
             return false;
@@ -75,6 +82,7 @@ public class BasketPage extends BasePage{
 
     @Override
     public boolean isPageOpen() {
+        logger.info("Is present checkoutButton");
         return CHECKOUT_BUTTON.isDisplayed();
     }
 }
