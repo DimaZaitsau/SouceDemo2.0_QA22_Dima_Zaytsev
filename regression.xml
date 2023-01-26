@@ -12,8 +12,8 @@
             <package name="tests"/>
         </packages>
     </test>
-    <test name="All Regression Tests on Edge">
-        <parameter name="browser" value="edge"/>
+    <test name="All Regression Tests on FireFox">
+        <parameter name="browser" value="fireFox"/>
         <groups>
             <run>
                 <include name="regression"/>
