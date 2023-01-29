@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Smoke Tests" parallel="tests" thread-count="2">
     <test name="All Smoke Tests on Chrome">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <groups>
             <run>
                 <include name="smoke"/>
@@ -13,7 +13,7 @@
     </packages>
     </test>
     <test name="All Smoke Tests on FireFox">
-        <parameter name="browser" value="fireFox"/>
+        <parameter name="browser" value="FireFox"/>
         <groups>
             <run>
                 <include name="smoke"/>
