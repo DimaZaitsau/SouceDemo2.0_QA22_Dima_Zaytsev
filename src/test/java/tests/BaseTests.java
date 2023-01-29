@@ -28,11 +28,11 @@ public abstract class BaseTests {
 
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
-    public void setUp(@Optional("chrome") String browserName, ITestContext testContext) throws Exception {
-        if (browserName.equals("chrome"))   {
+    public void setUp(@Optional("Chrome") String browserName, ITestContext testContext) throws Exception {
+        if (browserName.equals("Chrome"))   {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-        } else if (browserName.equals("fireFox")) {
+        } else if (browserName.equals("FireFox")) {
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else {
