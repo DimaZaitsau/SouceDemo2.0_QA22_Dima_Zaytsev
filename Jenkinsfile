@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    triggers {
+           parameterizedCron('''
+                       0 21 * * * %SUITE_NAME=smokeTest.xml;
+                       30 21 * * * %SUITE_NAME=regressionTest.xml;
+                    ''')
+    }
+
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "M3"
@@ -20,7 +27,7 @@ pipeline {
                 git branch: "%{params.BRANCH}%", url: 'https://github.com/DimaZaitsau/SouceDemo2.0_QA22_Dima_Zaytsev'
 
                 // Run Maven on a Unix agent.
-                bat "mvn -Dmaven.test.failure.ignore=true -DsuiteXmlFile=%{params.SUITE_NAME}% clean test"
+                bat "mvn -Dmaven.test.failure.ignore=true -DsuiteXmlFile=%{params.SUITE_NAME}% -Dbrowser=%{params.BROWSER}% -Dheadless=%{params.HEADLESS}% clean test"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
