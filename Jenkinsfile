@@ -2,7 +2,10 @@ pipeline {
     agent any
 
     triggers {
-        cron('50 18 * * *')
+        parameterizedCron('''
+                    0 20 * * * %SUITE_NAME=smoke.xml
+                    0 21 * 2 FRI %SUITE_NAME=regression.xml
+                ''')
     }
 
     tools {
@@ -21,7 +24,7 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: "%{params.BRANCH}%", url: 'https://github.com/DimaZaitsau/SouceDemo2.0_QA22_Dima_Zaytsev'
+                git branch: "${params.BRANCH}", url: 'https://github.com/DimaZaitsau/SouceDemo2.0_QA22_Dima_Zaytsev'
 
                 // Run Maven on a Unix agent.
                 bat "mvn -Dmaven.test.failure.ignore=true -DsuiteXmlFile=%{params.SUITE_NAME}% -Dbrowser=%{params.BROWSER}% -Dheadless=%{params.HEADLESS}% clean test"
